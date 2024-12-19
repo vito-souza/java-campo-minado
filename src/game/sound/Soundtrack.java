@@ -12,6 +12,9 @@ public class Soundtrack {
     private static final Logger LOGGER = Logger.getLogger(Soundtrack.class.getName());
     private static final String SOUNDTRACK_PATH = "./src/resources/sound/";
 
+    private Soundtrack() {
+    }
+
     public static void playSound(String sound) {
         File file = new File(SOUNDTRACK_PATH + sound);
 
