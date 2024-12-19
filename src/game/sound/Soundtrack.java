@@ -12,10 +12,6 @@ public class Soundtrack {
     private static final Logger LOGGER = Logger.getLogger(Soundtrack.class.getName());
     private static final String SOUNDTRACK_PATH = "./src/resources/sound/";
 
-    public Soundtrack() {
-        createDirectory();
-    }
-
     public static void playSound(String sound) {
         File file = new File(SOUNDTRACK_PATH + sound);
 
@@ -32,15 +28,5 @@ public class Soundtrack {
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Erro ao reproduzir o som: {0}", e.getMessage());
         }
-    }
-
-    private void createDirectory() {
-        File path = new File(SOUNDTRACK_PATH);
-
-        if (path.exists() || path.mkdirs()) {
-            return;
-        }
-
-        LOGGER.log(Level.SEVERE, "Falha ao criar o diretório: {0}", SOUNDTRACK_PATH);
     }
 }
