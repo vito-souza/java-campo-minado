@@ -16,21 +16,23 @@ public class Soundtrack {
     }
 
     public static void play(String sound) {
-        File file = new File(SOUNDTRACK_PATH + sound);
+        new Thread(() -> {
+            File file = new File(SOUNDTRACK_PATH + sound);
 
-        if (!file.exists()) {
-            LOGGER.log(Level.WARNING, "Arquivo não encontrado: {0}", file.getPath());
-            return;
-        }
+            if (!file.exists()) {
+                LOGGER.log(Level.WARNING, "Arquivo não encontrado: {0}", file.getPath());
+                return;
+            }
 
-        try (AudioInputStream audio = AudioSystem.getAudioInputStream(file)) {
-            Clip clip = AudioSystem.getClip();
-            clip.open(audio);
-            clip.start();
-            clip.drain();
-            clip.close();
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Erro ao reproduzir o som: {0}", e.getMessage());
-        }
+            try (AudioInputStream audio = AudioSystem.getAudioInputStream(file)) {
+                Clip clip = AudioSystem.getClip();
+                clip.open(audio);
+                clip.start();
+                clip.drain();
+                clip.close();
+            } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, "Erro ao reproduzir o som: {0}", e.getMessage());
+            }
+        }).start();
     }
 }
