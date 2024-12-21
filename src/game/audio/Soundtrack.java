@@ -10,7 +10,7 @@ import javax.sound.sampled.Clip;
 
 public class Soundtrack {
     private static final Logger LOGGER = Logger.getLogger(Soundtrack.class.getName());
-    private static final String SOUNDTRACK_PATH = "src/assets/music/";
+    private static final String SOUNDTRACK_PATH = "src/assets/";
 
     private Soundtrack() {
     }
