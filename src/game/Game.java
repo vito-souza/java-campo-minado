@@ -8,20 +8,21 @@ public class Game {
     private final int rows;
     private final int columns;
     private final int bombs;
-    private final int[][] game;
+    private final int[][] board;
     private final Random random = new Random();
 
     public Game(Difficulty difficulty) {
         this.rows = difficulty.getRows();
         this.columns = difficulty.getColumns();
         this.bombs = difficulty.getBombs();
-        this.game = new int[rows][columns];
+        this.board = new int[rows][columns];
     }
 
+    @SuppressWarnings("squid:S106")
     void renderGame() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                int node = game[i][j];
+                int node = board[i][j];
 
                 if (node == 0) {
                     System.out.print((i + j) % 2 == 0 ? "🌳" : "🟩");
@@ -43,8 +44,8 @@ public class Game {
             int row = random.nextInt(rows);
             int col = random.nextInt(columns);
 
-            if (game[row][col] != 1) {
-                game[row][col] = 1;
+            if (board[row][col] != 1) {
+                board[row][col] = 1;
                 placed++;
             }
         }
