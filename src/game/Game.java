@@ -2,6 +2,7 @@ package game;
 
 import java.util.Random;
 
+import game.ui.GameUI;
 import model.Difficulty;
 
 public class Game {
@@ -18,23 +19,16 @@ public class Game {
         this.board = new int[rows][columns];
     }
 
-    @SuppressWarnings("squid:S106")
-    void renderGame() {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                int node = board[i][j];
+    public int getRows() {
+        return rows;
+    }
 
-                if (node == 0) {
-                    System.out.print((i + j) % 2 == 0 ? "🌳" : "🟩");
-                } else if (node == 1) {
-                    System.out.print("💣");
-                } else if (node == 2) {
-                    System.out.print("🚩");
-                }
-            }
+    public int getColumns() {
+        return columns;
+    }
 
-            System.out.println();
-        }
+    public int[][] getBoard() {
+        return board;
     }
 
     void placeBombs() {
@@ -44,10 +38,18 @@ public class Game {
             int row = random.nextInt(rows);
             int col = random.nextInt(columns);
 
-            if (board[row][col] != 1) {
-                board[row][col] = 1;
+            if (board[row][col] != -1) {
+                board[row][col] = -1;
                 placed++;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Game game = new Game(Difficulty.MEDIUM);
+        game.placeBombs();
+
+        GameUI ui = new GameUI(game);
+        ui.renderGame();
     }
 }
