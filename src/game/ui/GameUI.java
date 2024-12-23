@@ -1,13 +1,14 @@
 package game.ui;
 
-import game.Game;
+import game.logic.GameHandler;
+import model.Node;
 
 public class GameUI {
     private final int columns;
     private final int rows;
-    private final int[][] board;
+    private final Node[][] board;
 
-    public GameUI(Game game) {
+    public GameUI(GameHandler game) {
         this.columns = game.getColumns();
         this.rows = game.getRows();
         this.board = game.getBoard();
@@ -27,24 +28,20 @@ public class GameUI {
         System.out.printf("%2d ", row);
 
         for (int col = 0; col < columns; col++) {
-            int value = board[row][col];
+            Node value = board[row][col];
             System.out.print(renderNode(value, row, col));
         }
 
         System.out.println();
     }
 
-    private String renderNode(int value, int row, int col) {
-        switch (value) {
-            case 0:
-                return (row + col) % 2 == 0 ? "🌳" : "🟩";
-            case -1:
-                return "💣";
-            case -2:
-                return "🚩";
-            default:
-                return String.valueOf(value);
-        }
+    private String renderNode(Node node, int row, int col) {
+        if (node.isBomb())
+            return "💣";
+        else if (node.isFlagged())
+            return "🚩";
+        else
+            return (row + col) % 2 == 0 ? "🌳" : "🟩";
     }
 
     public void renderGame() {
