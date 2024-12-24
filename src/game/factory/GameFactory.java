@@ -14,7 +14,7 @@ public class GameFactory {
 
     public static GameHandler generateNewGame() {
         Menu.title();
-        boolean valid = false;
+        boolean loop = true;
 
         do {
             System.out.print("> ");
@@ -23,14 +23,15 @@ public class GameFactory {
 
             if (input.startsWith("/play")) {
                 return generateGame(input);
-            } else if (input.equalsIgnoreCase("/exit")) {
+            }
+
+            if (input.equalsIgnoreCase("/exit")) {
                 System.out.println("Saindo do jogo...\n");
-                valid = true;
+                loop = false;
             } else {
                 System.out.println("Comando inválido. Tente novamente.\n");
             }
-
-        } while (!valid);
+        } while (loop);
 
         return null;
     }
@@ -38,20 +39,14 @@ public class GameFactory {
     private static GameHandler generateGame(String input) {
         String[] parts = input.split(" ");
 
-        if (parts.length != 2) {
+        if (parts.length != 2 || getDifficulty(parts[1]) == null) {
             System.out.println("Comando inválido. Use: /play [easy|medium|hard]\n");
             return null;
         }
 
-        Difficulty difficulty = getDifficulty(parts[1]);
+        System.out.println("Iniciando o jogo...\n");
 
-        if (difficulty != null) {
-            System.out.println("Iniciando o jogo...\n");
-            return new GameHandler(difficulty);
-        } else {
-            System.out.println("Dificuldade inválida. Tente novamente.\n");
-            return null;
-        }
+        return new GameHandler(getDifficulty(parts[1]));
     }
 
     private static Difficulty getDifficulty(String input) {
