@@ -40,14 +40,13 @@ public class GameUI {
     }
 
     private String renderNode(Node node) {
-        if (node.isBomb())
-            return BOMB_EMOJI;
-        else if (node.isFlagged())
+        if (node.isFlagged()) {
             return FLAG_EMOJI;
-        else if (node.isRevealed())
-            return String.valueOf(" " + node.getBombsAround());
-        else
+        } else if (node.isRevealed()) {
+            return String.valueOf(node.getBombsAround() + " ");
+        } else {
             return TREE_EMOJI;
+        }
     }
 
     public void renderGame() {
