@@ -6,7 +6,6 @@ import game.logic.GameHandler;
 import game.ui.Menu;
 import model.Difficulty;
 
-@SuppressWarnings("java:S106")
 public class GameFactory {
     private static final Scanner SCANNER = new Scanner(System.in);
 

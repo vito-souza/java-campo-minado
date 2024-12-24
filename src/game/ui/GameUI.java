@@ -3,7 +3,6 @@ package game.ui;
 import game.logic.GameHandler;
 import model.Node;
 
-@SuppressWarnings("java:S106")
 public class GameUI {
     private static final String BOMB_EMOJI = "💣";
     private static final String FLAG_EMOJI = "🚩";

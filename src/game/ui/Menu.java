@@ -1,6 +1,5 @@
 package game.ui;
 
-@SuppressWarnings("java:S106")
 public class Menu {
     private static final String TITLE = """
              ██████╗ █████╗ ███╗   ███╗██████╗  ██████╗     ███╗   ███╗██╗███╗   ██╗ █████╗ ██████╗  ██████╗

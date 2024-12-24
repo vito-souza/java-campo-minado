@@ -1,6 +1,5 @@
 package game.ui;
 
-@SuppressWarnings("java:S106")
 public class TerminalUtils {
 
     private TerminalUtils() {
