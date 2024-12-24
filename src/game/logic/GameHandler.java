@@ -3,6 +3,7 @@ package game.logic;
 import java.util.Random;
 
 import game.ui.GameUI;
+import game.ui.Menu;
 import model.Difficulty;
 import model.Node;
 
@@ -10,7 +11,6 @@ public class GameHandler {
     private final int rows;
     private final int columns;
     private final int bombs;
-
     private final Node[][] board;
     private final Random random = new Random();
 
@@ -46,14 +46,14 @@ public class GameHandler {
             int row = random.nextInt(rows);
             int col = random.nextInt(columns);
 
-            if (!board[row][col].isBomb()) {
+            if (!board[row][col].isBomb() && !board[row][col].isRevealed()) {
                 board[row][col].setBomb(true);
                 placed++;
             }
         }
     }
 
-    public void bombsAround() {
+    public void setBombsAround() {
         for (int row = 0; row < rows; row++)
             for (int col = 0; col < columns; col++)
                 board[row][col].setBombsAround(countBombsAround(row, col));
@@ -80,13 +80,15 @@ public class GameHandler {
         return bombsCount;
     }
 
-    public static void main(String[] args) {
-        GameHandler game = new GameHandler(Difficulty.EASY);
-        game.initBoard();
-        game.placeBombs();
-        game.bombsAround();
+    public void reveal(int row, int col) {
+        board[row][col].reveal();
+    }
 
-        GameUI ui = new GameUI(game);
-        ui.renderGame();
+    public void run() {
+        GameUI graphics = new GameUI(this);
+        initBoard();
+        placeBombs();
+        setBombsAround();
+        graphics.renderGame();
     }
 }
