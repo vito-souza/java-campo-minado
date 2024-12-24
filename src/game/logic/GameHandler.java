@@ -3,7 +3,6 @@ package game.logic;
 import java.util.Random;
 
 import game.ui.GameUI;
-import game.ui.Menu;
 import model.Difficulty;
 import model.Node;
 

@@ -1,17 +1,20 @@
-package game.logic;
+package game.factory;
 
 import java.util.Scanner;
 
+import game.logic.GameHandler;
+import game.ui.Menu;
 import model.Difficulty;
 
 @SuppressWarnings("java:S106")
-public class InputHandler {
+public class GameFactory {
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    private InputHandler() {
+    private GameFactory() {
     }
 
-    public static void menu() {
+    public static GameHandler generateNewGame() {
+        Menu.title();
         boolean valid = false;
 
         do {
@@ -20,38 +23,36 @@ public class InputHandler {
             System.out.println();
 
             if (input.startsWith("/play")) {
-                GameHandler newGame = generateGame(input);
-
-                if (newGame != null) {
-                    newGame.run();
-                    valid = true;
-                }
+                return generateGame(input);
             } else if (input.equalsIgnoreCase("/exit")) {
                 System.out.println("Saindo do jogo...\n");
                 valid = true;
             } else {
                 System.out.println("Comando inválido. Tente novamente.\n");
-                valid = false;
             }
 
         } while (!valid);
+
+        return null;
     }
 
     private static GameHandler generateGame(String input) {
         String[] parts = input.split(" ");
 
-        if (parts.length == 2) {
-            Difficulty difficulty = getDifficulty(parts[1]);
-
-            if (difficulty != null) {
-                System.out.println("Iniciando o jogo...\n");
-                return new GameHandler(difficulty);
-            } else {
-                System.out.println("Dificuldade inválida. Tente novamente.\n");
-            }
+        if (parts.length != 2) {
+            System.out.println("Comando inválido. Use: /play [easy|medium|hard]\n");
+            return null;
         }
 
-        return null;
+        Difficulty difficulty = getDifficulty(parts[1]);
+
+        if (difficulty != null) {
+            System.out.println("Iniciando o jogo...\n");
+            return new GameHandler(difficulty);
+        } else {
+            System.out.println("Dificuldade inválida. Tente novamente.\n");
+            return null;
+        }
     }
 
     private static Difficulty getDifficulty(String input) {
