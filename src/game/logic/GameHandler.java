@@ -83,7 +83,7 @@ public class GameHandler {
         board[row][col].reveal();
     }
 
-    public void run() {
+    public void start() {
         GameUI graphics = new GameUI(this);
         initBoard();
         placeBombs();

@@ -52,6 +52,8 @@ public class GameUI {
     }
 
     public void renderGame() {
+        TerminalUtils.clear();
+
         renderColumnHeader();
 
         for (int row = 0; row < rows; row++) {
