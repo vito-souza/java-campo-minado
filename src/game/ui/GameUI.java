@@ -15,7 +15,7 @@ public class GameUI {
     }
 
     private void renderColumnHeader() {
-        System.out.print(" ".repeat(4));
+        System.out.print(" ".repeat(3));
 
         for (int col = 0; col < columns; col++) {
             System.out.print((char) ('A' + col) + " ");
@@ -37,11 +37,12 @@ public class GameUI {
 
     private String renderNode(Node node, int row, int col) {
         if (node.isBomb())
-            return "💣";
+            return "* ";
         else if (node.isFlagged())
             return "🚩";
         else
-            return (row + col) % 2 == 0 ? "🌳" : "🟩";
+            return String.valueOf(node.getBombsAround() + " ");
+        // return (row + col) % 2 == 0 ? "🌳" : "🟩";
     }
 
     public void renderGame() {

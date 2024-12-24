@@ -53,10 +53,38 @@ public class GameHandler {
         }
     }
 
+    public void bombsAround() {
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < columns; col++)
+                board[row][col].setBombsAround(countBombsAround(row, col));
+    }
+
+    private int countBombsAround(int row, int col) {
+        int bombsCount = 0;
+
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i == 0 && j == 0)
+                    continue;
+
+                int neighborRow = row + i;
+                int neighborCol = col + j;
+
+                if (neighborRow >= 0 && neighborRow < rows && neighborCol >= 0 && neighborCol < columns
+                        && board[neighborRow][neighborCol].isBomb()) {
+                    bombsCount++;
+                }
+            }
+        }
+
+        return bombsCount;
+    }
+
     public static void main(String[] args) {
-        GameHandler game = new GameHandler(Difficulty.MEDIUM);
+        GameHandler game = new GameHandler(Difficulty.EASY);
         game.initBoard();
         game.placeBombs();
+        game.bombsAround();
 
         GameUI ui = new GameUI(game);
         ui.renderGame();
