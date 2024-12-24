@@ -3,6 +3,7 @@ package game.ui;
 import game.logic.GameHandler;
 import model.Node;
 
+@SuppressWarnings("java:S106")
 public class GameUI {
     private final int columns;
     private final int rows;
@@ -37,12 +38,11 @@ public class GameUI {
 
     private String renderNode(Node node, int row, int col) {
         if (node.isBomb())
-            return "* ";
+            return "💣";
         else if (node.isFlagged())
             return "🚩";
         else
-            return String.valueOf(node.getBombsAround() + " ");
-        // return (row + col) % 2 == 0 ? "🌳" : "🟩";
+            return (row + col) % 2 == 0 ? "🌳" : "🟩";
     }
 
     public void renderGame() {
