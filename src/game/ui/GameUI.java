@@ -5,8 +5,12 @@ import model.Node;
 
 @SuppressWarnings("java:S106")
 public class GameUI {
-    private final int columns;
+    private static final String BOMB_EMOJI = "💣";
+    private static final String FLAG_EMOJI = "🚩";
+    private static final String TREE_EMOJI = "🌳";
+
     private final int rows;
+    private final int columns;
     private final Node[][] board;
 
     public GameUI(GameHandler game) {
@@ -16,7 +20,7 @@ public class GameUI {
     }
 
     private void renderColumnHeader() {
-        System.out.print(" ".repeat(3));
+        System.out.print(" ".repeat(4));
 
         for (int col = 0; col < columns; col++) {
             System.out.print((char) ('A' + col) + " ");
@@ -30,19 +34,21 @@ public class GameUI {
 
         for (int col = 0; col < columns; col++) {
             Node value = board[row][col];
-            System.out.print(renderNode(value, row, col));
+            System.out.print(renderNode(value));
         }
 
         System.out.println();
     }
 
-    private String renderNode(Node node, int row, int col) {
+    private String renderNode(Node node) {
         if (node.isBomb())
-            return "💣";
+            return BOMB_EMOJI;
         else if (node.isFlagged())
-            return "🚩";
+            return FLAG_EMOJI;
+        else if (node.isRevealed())
+            return String.valueOf(" " + node.getBombsAround());
         else
-            return (row + col) % 2 == 0 ? "🌳" : "🟩";
+            return TREE_EMOJI;
     }
 
     public void renderGame() {
