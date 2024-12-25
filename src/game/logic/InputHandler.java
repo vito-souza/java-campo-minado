@@ -15,12 +15,12 @@ public class InputHandler {
     public void getInput() {
         String input = Menu.inputPrompt().trim();
 
-        if (input.equalsIgnoreCase("/exit")) {
+        if (input.equalsIgnoreCase("exit")) {
             System.out.println("Saindo do jogo...\n");
             System.exit(0);
         }
 
-        Pattern pattern = Pattern.compile("^/(reveal|flag) (\\d+)([a-zA-Z])$");
+        Pattern pattern = Pattern.compile("^(reveal|flag) (\\d+)([a-zA-Z])$");
         Matcher matcher = pattern.matcher(input);
 
         while (!matcher.matches()) {

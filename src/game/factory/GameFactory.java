@@ -16,12 +16,12 @@ public class GameFactory {
         Menu.title();
         Soundtrack.play("/music/menu.wav", true);
 
-        Pattern pattern = Pattern.compile("^/play (easy|medium|hard)$");
+        Pattern pattern = Pattern.compile("^play (easy|medium|hard)$");
 
         while (true) {
             String input = Menu.inputPrompt().trim();
 
-            if (input.equalsIgnoreCase("/exit")) {
+            if (input.equalsIgnoreCase("exit")) {
                 System.out.println("Saindo do jogo...\n");
                 System.exit(0);
             }
@@ -29,10 +29,12 @@ public class GameFactory {
             Matcher matcher = pattern.matcher(input);
 
             if (matcher.matches()) {
+                Menu.rules();
+                Menu.commands();
                 return new GameHandler(Difficulty.valueOf(matcher.group(1).toUpperCase()));
             }
 
-            System.out.println("Entrada inválida! Use: /play [easy|medium|hard] ou /exit para sair.");
+            System.out.println("Entrada inválida! Use: play [easy|medium|hard] ou exit para sair.");
         }
     }
 }

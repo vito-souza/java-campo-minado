@@ -68,8 +68,8 @@ public class Menu {
         TerminalUtils.clear();
 
         System.out.println("\n" + GAME_TITLE);
-        System.out.println("\tDigite \"/play [dificuldade]\" para jogar e \"/exit\" para sair.\n");
-        System.out.println("\t\tExemplo: /play medium");
+        System.out.println("\tDigite \"play [dificuldade]\" para jogar e \"exit\" para sair.\n");
+        System.out.println("\t\tExemplo: play medium");
     }
 
     public static void rules() {
@@ -87,11 +87,11 @@ public class Menu {
         TerminalUtils.clear();
 
         System.out.println("\n" + GAME_COMANDS);
-        System.out.println("\t1. Use \"/reveal [posição]\" para revelar uma célula no tabuleiro.");
+        System.out.println("\t1. Use \"reveal [posição]\" para revelar uma célula no tabuleiro.");
         System.out.println(
-                "\t2. Use \"/flag [posição]\" para marcar/desmarcar uma célula como suspeita de conter uma mina.");
-        System.out.println("\t\tExemplo: /reveal 1b, /flag 3c...");
-        System.out.println("\t3. Use \"/exit para sair.");
+                "\t2. Use \"flag [posição]\" para marcar/desmarcar uma célula como suspeita de conter uma mina.");
+        System.out.println("\t\tExemplo: reveal 1b, flag 3c...");
+        System.out.println("\t3. Use \"exit para sair.");
         inputPrompt();
     }
 
@@ -129,7 +129,7 @@ public class Menu {
         System.out.println("**Apoio Moral**: Eu");
         System.out.println("**Planejamento**: Nenhum");
         System.out.println("**Controle de Qualidade**: Nenhum\n");
-        System.out.println("**Obrigado por jogar!** Se sobreviveu, parabéns! 🙏🎮\n");
+        System.out.println("**Obrigado por jogar!** Se sobreviveu, parabéns! 🙏🎮");
 
         inputPrompt();
     }
