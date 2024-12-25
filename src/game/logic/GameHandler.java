@@ -41,18 +41,18 @@ public class GameHandler {
                 board[row][col] = new Node();
     }
 
-    public void placeBombs() {
+    public void placeBombs(int firstRow, int firstCol) {
         int placed = 0;
 
         while (placed < bombs) {
             int row = random.nextInt(rows);
             int col = random.nextInt(columns);
 
-            if (Math.abs(row - 6) <= 1 && Math.abs(col - 6) <= 1) {
+            if (Math.abs(row - firstRow) <= 1 && Math.abs(col - firstCol) <= 1) {
                 continue;
             }
 
-            if (!board[row][col].isBomb() && !board[row][col].isRevealed()) {
+            if (!board[row][col].isBomb()) {
                 board[row][col].setBomb(true);
                 placed++;
             }
@@ -96,7 +96,7 @@ public class GameHandler {
         board[row][col].reveal();
 
         if (isFirstMove) {
-            placeBombs();
+            placeBombs(row, col);
             isFirstMove = false;
         }
 
@@ -126,7 +126,7 @@ public class GameHandler {
 
     public void start() {
         initBoard();
-        reveal(6, 6);
+        reveal(10, 10);
         ui.renderGame();
     }
 }
