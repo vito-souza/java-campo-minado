@@ -119,8 +119,6 @@ public class Menu {
     public static void displayCredits() {
         TerminalUtils.clear();
         System.out.println("\n" + CREDITS);
-
-        System.out.println("🎮 **Créditos do Jogo** 🎮\n");
         System.out.println("**Desenvolvimento**: Eu");
         System.out.println("**Roteiro**: Eu");
         System.out.println("**Programação**: Eu");

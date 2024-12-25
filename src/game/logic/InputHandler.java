@@ -24,15 +24,17 @@ public class InputHandler {
             matcher = pattern.matcher(input);
         }
 
-        int row = Integer.parseInt(matcher.group(1));
-        char colCharacter = matcher.group(2).charAt(0);
+        String command = matcher.group(1);
+        int row = Integer.parseInt(matcher.group(2));
+        char colCharacter = matcher.group(3).charAt(0);
 
         int col = colCharacter - 'a';
 
-        if (input.startsWith("/reveal")) {
+        if ("reveal".equals(command)) {
             game.reveal(row, col);
-        } else if (input.startsWith("/flag")) {
+        } else if ("flag".equals(command)) {
             game.setFlag(row, col);
         }
     }
+
 }
