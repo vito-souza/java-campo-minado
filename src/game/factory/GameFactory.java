@@ -1,5 +1,8 @@
 package game.factory;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import game.audio.Soundtrack;
 import game.logic.GameHandler;
 import game.ui.Menu;
@@ -13,51 +16,23 @@ public class GameFactory {
         Menu.title();
         Soundtrack.play("/music/menu.wav", true);
 
+        Pattern pattern = Pattern.compile("^/play (easy|medium|hard)$");
+
         while (true) {
-            String input = Menu.inputPrompt();
-
-            if (input.startsWith("/play")) {
-                GameHandler newGame = generateGame(input);
-
-                if (newGame == null) {
-                    continue;
-                }
-
-                Menu.rules();
-                Menu.commands();
-                return newGame;
-            }
+            String input = Menu.inputPrompt().trim();
 
             if (input.equalsIgnoreCase("/exit")) {
                 System.out.println("Saindo do jogo...\n");
                 System.exit(0);
             }
-        }
-    }
 
-    private static GameHandler generateGame(String input) {
-        String[] parts = input.split(" ");
+            Matcher matcher = pattern.matcher(input);
 
-        if (parts.length != 2 || getDifficulty(parts[1]) == null) {
-            System.out.println("Comando inválido. Use: /play [easy|medium|hard]\n");
-            return null;
-        }
+            if (matcher.matches()) {
+                return new GameHandler(Difficulty.valueOf(matcher.group(1).toUpperCase()));
+            }
 
-        System.out.println("Iniciando o jogo...\n");
-
-        return new GameHandler(getDifficulty(parts[1]));
-    }
-
-    private static Difficulty getDifficulty(String input) {
-        switch (input.toLowerCase()) {
-            case "easy":
-                return Difficulty.EASY;
-            case "medium":
-                return Difficulty.MEDIUM;
-            case "hard":
-                return Difficulty.HARD;
-            default:
-                return null;
+            System.out.println("Entrada inválida! Use: /play [easy|medium|hard] ou /exit para sair.");
         }
     }
 }
