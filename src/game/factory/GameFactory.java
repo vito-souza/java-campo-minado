@@ -2,6 +2,7 @@ package game.factory;
 
 import java.util.Scanner;
 
+import game.audio.Soundtrack;
 import game.logic.GameHandler;
 import game.ui.Menu;
 import model.Difficulty;
@@ -14,6 +15,7 @@ public class GameFactory {
 
     public static GameHandler generateNewGame() {
         Menu.title();
+        Soundtrack.play("/music/menu.wav");
 
         while (true) {
             String input = inputPrompt();
