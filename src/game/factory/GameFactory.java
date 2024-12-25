@@ -1,15 +1,11 @@
 package game.factory;
 
-import java.util.Scanner;
-
 import game.audio.Soundtrack;
 import game.logic.GameHandler;
 import game.ui.Menu;
 import model.Difficulty;
 
 public class GameFactory {
-    private static final Scanner SCANNER = new Scanner(System.in);
-
     private GameFactory() {
     }
 
@@ -18,7 +14,7 @@ public class GameFactory {
         Soundtrack.play("/music/menu.wav");
 
         while (true) {
-            String input = inputPrompt();
+            String input = Menu.inputPrompt();
 
             if (input.startsWith("/play")) {
                 GameHandler newGame = generateGame(input);
@@ -27,8 +23,8 @@ public class GameFactory {
                     continue;
                 }
 
-                displayRules();
-                displayCommands();
+                Menu.rules();
+                Menu.commands();
                 return newGame;
             }
 
@@ -37,14 +33,6 @@ public class GameFactory {
                 System.exit(0);
             }
         }
-    }
-
-    private static String inputPrompt() {
-        System.out.print("> ");
-        String input = SCANNER.nextLine().trim();
-        System.out.println();
-
-        return input;
     }
 
     private static GameHandler generateGame(String input) {
@@ -71,15 +59,5 @@ public class GameFactory {
             default:
                 return null;
         }
-    }
-
-    private static void displayRules() {
-        Menu.rules();
-        inputPrompt();
-    }
-
-    public static void displayCommands() {
-        Menu.commands();
-        inputPrompt();
     }
 }
