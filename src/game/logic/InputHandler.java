@@ -30,11 +30,10 @@ public class InputHandler {
 
         int col = colCharacter - 'a';
 
-        if ("reveal".equals(command)) {
+        if (command.equals("reveal")) {
             game.reveal(row, col);
-        } else if ("flag".equals(command)) {
+        } else if (command.equals("flag")) {
             game.setFlag(row, col);
         }
     }
-
 }
