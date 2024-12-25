@@ -48,7 +48,7 @@ public class Menu {
         System.out.println("\t1. O objetivo é descobrir todas as células do tabuleiro sem selecionar uma mina.");
         System.out.println("\t2. Cada célula pode conter uma mina ou um número indicando minas ao redor.");
         System.out.println("\t3. Selecionar uma célula com uma mina termina o jogo.");
-        System.out.println("\t4. O jogo termina quando todas as células sem minas forem abertas.");
+        System.out.println("\t4. O jogo termina quando todas as células sem minas forem abertas.\n");
     }
 
     public static void commands() {
@@ -58,6 +58,6 @@ public class Menu {
         System.out.println("\t1. Use \"/reveal [posição]\" para revelar uma célula no tabuleiro.");
         System.out.println(
                 "\t2. Use \"/flag [posição]\" para marcar/desmarcar uma célula como suspeita de conter uma mina.");
-        System.out.println("\t\tExemplo: /reveal 1b, /flag 3c...");
+        System.out.println("\t\tExemplo: /reveal 1b, /flag 3c...\n");
     }
 }

@@ -13,6 +13,7 @@ public class GameHandler {
     private final Node[][] board;
     private final Random random = new Random();
     private final GameUI ui;
+    private final InputHandler inputHandler;
     private boolean isFirstMove = true;
 
     public GameHandler(Difficulty difficulty) {
@@ -21,6 +22,7 @@ public class GameHandler {
         this.bombs = difficulty.getBombs();
         this.board = new Node[rows][columns];
         this.ui = new GameUI(this);
+        this.inputHandler = new InputHandler(this);
     }
 
     public int getRows() {
@@ -95,6 +97,9 @@ public class GameHandler {
 
         board[row][col].reveal();
 
+        if (board[row][col].isBomb())
+            System.out.println("BOOM! Você perdeu o jogo!");
+
         if (isFirstMove) {
             placeBombs(row, col);
             isFirstMove = false;
@@ -102,6 +107,10 @@ public class GameHandler {
 
         if (board[row][col].getBombsAround() == 0) {
             revealAdjacentCells(row, col);
+        }
+
+        if (checkWin()) {
+            System.out.println("Parabéns! Você venceu o jogo!");
         }
     }
 
@@ -124,9 +133,37 @@ public class GameHandler {
         return row >= 0 && row < rows && col >= 0 && col < columns;
     }
 
+    public void setFlag(int row, int col) {
+        if (board[row][col].isRevealed()) {
+            return;
+        }
+
+        board[row][col].toggleFlag();
+
+        ui.renderGame();
+    }
+
+    private boolean checkWin() {
+        int revealedCount = 0;
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (board[row][col].isRevealed()) {
+                    revealedCount++;
+                }
+            }
+        }
+
+        return revealedCount == (rows * columns - bombs);
+    }
+
     public void start() {
         initBoard();
-        reveal(10, 10);
         ui.renderGame();
+
+        while (true) {
+            inputHandler.getInput();
+            ui.renderGame();
+        }
     }
 }

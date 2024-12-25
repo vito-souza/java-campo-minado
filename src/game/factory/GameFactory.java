@@ -14,28 +14,35 @@ public class GameFactory {
 
     public static GameHandler generateNewGame() {
         Menu.title();
-        boolean loop = true;
 
-        do {
-            System.out.print("> ");
-            String input = SCANNER.nextLine().trim();
-            System.out.println();
+        while (true) {
+            String input = inputPrompt();
 
             if (input.startsWith("/play")) {
+                GameHandler newGame = generateGame(input);
+
+                if (newGame == null) {
+                    continue;
+                }
+
                 displayRules();
                 displayCommands();
-                return generateGame(input);
+                return newGame;
             }
 
             if (input.equalsIgnoreCase("/exit")) {
                 System.out.println("Saindo do jogo...\n");
-                loop = false;
-            } else {
-                System.out.println("Comando inválido. Tente novamente.\n");
+                System.exit(0);
             }
-        } while (loop);
+        }
+    }
 
-        return null;
+    private static String inputPrompt() {
+        System.out.print("> ");
+        String input = SCANNER.nextLine().trim();
+        System.out.println();
+
+        return input;
     }
 
     private static GameHandler generateGame(String input) {
@@ -66,17 +73,11 @@ public class GameFactory {
 
     private static void displayRules() {
         Menu.rules();
-
-        System.out.println("\nPressione Enter para continuar...\n");
-        System.out.print("> ");
-        SCANNER.nextLine();
+        inputPrompt();
     }
 
     public static void displayCommands() {
         Menu.commands();
-
-        System.out.println("\nPressione Enter para continuar...\n");
-        System.out.print("> ");
-        SCANNER.nextLine();
+        inputPrompt();
     }
 }

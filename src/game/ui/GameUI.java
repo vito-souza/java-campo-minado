@@ -22,7 +22,7 @@ public class GameUI {
         System.out.print(" ".repeat(4));
 
         for (int col = 0; col < columns; col++) {
-            System.out.print((char) ('A' + col) + " ");
+            System.out.print((char) ('a' + col) + " ");
         }
 
         System.out.println();
