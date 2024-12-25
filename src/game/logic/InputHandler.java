@@ -12,42 +12,10 @@ public class InputHandler {
         this.game = game;
     }
 
-    public void a() {
-        boolean loop = true;
-
-        do {
-            String input = Menu.inputPrompt();
-
-            String[] parts = input.split(" ", 2);
-
-            int row = Integer.parseInt(parts[1].replaceAll("[^0-9]", ""));
-
-            char letter = parts[1].replaceAll("[^a-zA-Z]", "").charAt(0);
-            int col = letter - 'a';
-
-            if (row > game.getRows() || row < 0 || col > game.getColumns() || col < 0) {
-                System.out.println("Coordenadas inválidas. Tente novamente.");
-                continue;
-            }
-
-            if (input.startsWith("/reveal")) {
-                game.reveal(row, col);
-                return;
-            }
-
-            if (input.startsWith("/flag")) {
-                game.setFlag(row, col);
-                return;
-            }
-
-            System.out.println("Insira uma entrada válida.");
-        } while (loop);
-    }
-
     public void getInput() {
         String input = Menu.inputPrompt();
 
-        Pattern pattern = Pattern.compile("^/reveal (\\d+)([a-zA-Z])$");
+        Pattern pattern = Pattern.compile("^/(reveal|flag) (\\d+)([a-zA-Z])$");
         Matcher matcher = pattern.matcher(input);
 
         while (!matcher.matches()) {
