@@ -35,6 +35,10 @@ public class InputHandler {
 
         int col = colCharacter - 'a';
 
+        if (row < 0 || row >= game.getRows() || col < 0 || col >= game.getColumns()) {
+            return;
+        }
+
         if (command.equals("reveal")) {
             game.reveal(row, col);
         } else if (command.equals("flag")) {

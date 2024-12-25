@@ -1,4 +1,4 @@
-package model;
+package game.model;
 
 public enum Difficulty {
     EASY(8, 10, 10),

@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 
 import game.audio.Soundtrack;
 import game.logic.GameHandler;
+import game.model.Difficulty;
 import game.ui.Menu;
-import model.Difficulty;
 
 public class GameFactory {
     private GameFactory() {

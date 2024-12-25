@@ -3,10 +3,10 @@ package game.logic;
 import java.util.Random;
 
 import game.audio.Soundtrack;
+import game.model.Difficulty;
+import game.model.Node;
 import game.ui.GameUI;
 import game.ui.Menu;
-import model.Difficulty;
-import model.Node;
 
 public class GameHandler {
     private final int rows;

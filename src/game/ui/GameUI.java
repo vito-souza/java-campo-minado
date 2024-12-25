@@ -1,7 +1,7 @@
 package game.ui;
 
 import game.logic.GameHandler;
-import model.Node;
+import game.model.Node;
 
 public class GameUI {
     private static final String BOMB_EMOJI = "💣";
