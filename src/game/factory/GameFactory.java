@@ -11,7 +11,7 @@ public class GameFactory {
 
     public static GameHandler generateNewGame() {
         Menu.title();
-        Soundtrack.play("/music/menu.wav");
+        Soundtrack.play("/music/menu.wav", true);
 
         while (true) {
             String input = Menu.inputPrompt();

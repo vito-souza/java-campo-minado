@@ -2,6 +2,7 @@ package game.logic;
 
 import java.util.Random;
 
+import game.audio.Soundtrack;
 import game.ui.GameUI;
 import game.ui.Menu;
 import model.Difficulty;
@@ -24,6 +25,7 @@ public class GameHandler {
         this.board = new Node[rows][columns];
         this.ui = new GameUI(this);
         this.inputHandler = new InputHandler(this);
+        Soundtrack.play("/music/in_game.wav", true);
     }
 
     public int getRows() {

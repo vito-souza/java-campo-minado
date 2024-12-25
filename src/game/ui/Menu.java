@@ -96,7 +96,7 @@ public class Menu {
 
     public static void gameOver() {
         TerminalUtils.clear();
-        Soundtrack.play("/music/game_over.wav");
+        Soundtrack.play("/music/game_over.wav", true);
 
         System.out.println("\n" + GAME_OVER);
         System.out.println("\tVocê selecionou uma bomba.");
@@ -107,7 +107,7 @@ public class Menu {
 
     public static void victory() {
         TerminalUtils.clear();
-        Soundtrack.play("/music/you_win.wav");
+        Soundtrack.play("/music/you_win.wav", true);
 
         System.out.println("\n" + YOU_WIN);
         System.out.println("\tParabéns! Você teve paciência o suficiente pra chegar ao fim do jogo sem perder.");
