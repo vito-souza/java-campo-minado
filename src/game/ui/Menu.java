@@ -2,6 +2,8 @@ package game.ui;
 
 import java.util.Scanner;
 
+import game.audio.Soundtrack;
+
 public class Menu {
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -50,6 +52,15 @@ public class Menu {
                ╚═╝    ╚═════╝  ╚═════╝      ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝
             """;
 
+    public static final String CREDITS = """
+             ██████╗██████╗ ███████╗██████╗ ██╗████████╗ ██████╗ ███████╗
+            ██╔════╝██╔══██╗██╔════╝██╔══██╗██║╚══██╔══╝██╔═══██╗██╔════╝
+            ██║     ██████╔╝█████╗  ██║  ██║██║   ██║   ██║   ██║███████╗
+            ██║     ██╔══██╗██╔══╝  ██║  ██║██║   ██║   ██║   ██║╚════██║
+            ╚██████╗██║  ██║███████╗██████╔╝██║   ██║   ╚██████╔╝███████║
+             ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝   ╚═╝    ╚═════╝ ╚══════╝
+            """;
+
     private Menu() {
     }
 
@@ -58,7 +69,7 @@ public class Menu {
 
         System.out.println("\n" + GAME_TITLE);
         System.out.println("\tDigite \"/play [dificuldade]\" para jogar e \"/exit\" para sair.\n");
-        System.out.println("\t\tExemplo: /play medium\n");
+        System.out.println("\t\tExemplo: /play medium");
     }
 
     public static void rules() {
@@ -68,7 +79,7 @@ public class Menu {
         System.out.println("\t1. O objetivo é descobrir todas as células do tabuleiro sem selecionar uma mina.");
         System.out.println("\t2. Cada célula pode conter uma mina ou um número indicando minas ao redor.");
         System.out.println("\t3. Selecionar uma célula com uma mina termina o jogo.");
-        System.out.println("\t4. O jogo termina quando todas as células sem minas forem abertas.\n");
+        System.out.println("\t4. O jogo termina quando todas as células sem minas forem abertas.");
         inputPrompt();
     }
 
@@ -79,28 +90,53 @@ public class Menu {
         System.out.println("\t1. Use \"/reveal [posição]\" para revelar uma célula no tabuleiro.");
         System.out.println(
                 "\t2. Use \"/flag [posição]\" para marcar/desmarcar uma célula como suspeita de conter uma mina.");
-        System.out.println("\t\tExemplo: /reveal 1b, /flag 3c...\n");
+        System.out.println("\t\tExemplo: /reveal 1b, /flag 3c...");
         inputPrompt();
     }
 
     public static void gameOver() {
         TerminalUtils.clear();
+        Soundtrack.play("/music/game_over.wav");
 
         System.out.println("\n" + GAME_OVER);
-        System.out.println("\tVocê selecionou uma bomba.\n");
+        System.out.println("\tVocê selecionou uma bomba.");
         inputPrompt();
+
+        displayCredits();
     }
 
     public static void victory() {
         TerminalUtils.clear();
+        Soundtrack.play("/music/you_win.wav");
 
         System.out.println("\n" + YOU_WIN);
-        System.out.println("\tParabéns! Você teve paciência o suficiente pra chegar ao fim do jogo sem perder.\n");
+        System.out.println("\tParabéns! Você teve paciência o suficiente pra chegar ao fim do jogo sem perder.");
+        inputPrompt();
+
+        displayCredits();
+    }
+
+    public static void displayCredits() {
+        TerminalUtils.clear();
+        System.out.println("\n" + CREDITS);
+
+        System.out.println("🎮 **Créditos do Jogo** 🎮\n");
+        System.out.println("**Desenvolvimento**: Eu");
+        System.out.println("**Roteiro**: Eu");
+        System.out.println("**Programação**: Eu");
+        System.out.println("**Design**: Eu");
+        System.out.println("**Áudio**: Eu");
+        System.out.println("**Testes**: Eu");
+        System.out.println("**Apoio Moral**: Eu");
+        System.out.println("**Planejamento**: Nenhum");
+        System.out.println("**Controle de Qualidade**: Nenhum\n");
+        System.out.println("**Obrigado por jogar!** Se sobreviveu, parabéns! 🙏🎮\n");
+
         inputPrompt();
     }
 
     public static String inputPrompt() {
-        System.out.print("> ");
+        System.out.print("\n> ");
         String input = SCANNER.nextLine().trim();
         System.out.println();
 

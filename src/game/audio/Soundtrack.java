@@ -12,6 +12,9 @@ public class Soundtrack {
     private static final Logger LOGGER = Logger.getLogger(Soundtrack.class.getName());
     private static final String SOUNDTRACK_PATH = "src/assets/";
 
+    // Variável para armazenar o clip atual
+    private static Clip playingNow = null;
+
     private Soundtrack() {
     }
 
@@ -20,6 +23,11 @@ public class Soundtrack {
     }
 
     public static void play(String sound, boolean loop) {
+        if (playingNow != null && playingNow.isRunning()) {
+            playingNow.stop();
+            playingNow.close();
+        }
+
         new Thread(() -> {
             File file = getFile(sound);
 
@@ -28,17 +36,18 @@ public class Soundtrack {
             }
 
             try (AudioInputStream audio = AudioSystem.getAudioInputStream(file)) {
-                Clip clip = AudioSystem.getClip();
-                clip.open(audio);
+                playingNow = AudioSystem.getClip();
+                playingNow.open(audio);
 
                 if (loop) {
-                    clip.loop(Clip.LOOP_CONTINUOUSLY);
+                    playingNow.loop(Clip.LOOP_CONTINUOUSLY);
                 } else {
-                    clip.start();
+                    playingNow.start();
                 }
 
-                clip.drain();
-                clip.close();
+                playingNow.drain();
+                playingNow.close();
+                playingNow = null;
             } catch (Exception e) {
                 LOGGER.log(Level.SEVERE, "Erro ao reproduzir o som: {0}", e.getMessage());
             }

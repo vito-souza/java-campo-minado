@@ -1,34 +1,34 @@
 package game.logic;
 
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import game.ui.Menu;
 
 public class InputHandler {
-    private static final Scanner SCANNER = new Scanner(System.in);
     private final GameHandler game;
 
     public InputHandler(GameHandler game) {
         this.game = game;
     }
 
-    public void getInput() {
+    public void a() {
         boolean loop = true;
 
         do {
-            System.out.print("\n> ");
-            String input = SCANNER.nextLine().trim();
-            System.out.println();
+            String input = Menu.inputPrompt();
 
             String[] parts = input.split(" ", 2);
-
-            if (parts.length < 2) {
-                System.out.println("Entrada inválida. Tente novamente.");
-                continue;
-            }
 
             int row = Integer.parseInt(parts[1].replaceAll("[^0-9]", ""));
 
             char letter = parts[1].replaceAll("[^a-zA-Z]", "").charAt(0);
             int col = letter - 'a';
+
+            if (row > game.getRows() || row < 0 || col > game.getColumns() || col < 0) {
+                System.out.println("Coordenadas inválidas. Tente novamente.");
+                continue;
+            }
 
             if (input.startsWith("/reveal")) {
                 game.reveal(row, col);
@@ -42,5 +42,29 @@ public class InputHandler {
 
             System.out.println("Insira uma entrada válida.");
         } while (loop);
+    }
+
+    public void getInput() {
+        String input = Menu.inputPrompt();
+
+        Pattern pattern = Pattern.compile("^/reveal (\\d+)([a-zA-Z])$");
+        Matcher matcher = pattern.matcher(input);
+
+        while (!matcher.matches()) {
+            System.out.println("Entrada inválida! Tente novamente.");
+            input = Menu.inputPrompt();
+            matcher = pattern.matcher(input);
+        }
+
+        int row = Integer.parseInt(matcher.group(1));
+        char colCharacter = matcher.group(2).charAt(0);
+
+        int col = colCharacter - 'a';
+
+        if (input.startsWith("/reveal")) {
+            game.reveal(row, col);
+        } else if (input.startsWith("/flag")) {
+            game.setFlag(row, col);
+        }
     }
 }
