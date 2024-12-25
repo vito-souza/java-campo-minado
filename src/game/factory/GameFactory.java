@@ -22,6 +22,8 @@ public class GameFactory {
             System.out.println();
 
             if (input.startsWith("/play")) {
+                displayRules();
+                displayCommands();
                 return generateGame(input);
             }
 
@@ -60,5 +62,21 @@ public class GameFactory {
             default:
                 return null;
         }
+    }
+
+    private static void displayRules() {
+        Menu.rules();
+
+        System.out.println("\nPressione Enter para continuar...\n");
+        System.out.print("> ");
+        SCANNER.nextLine();
+    }
+
+    public static void displayCommands() {
+        Menu.commands();
+
+        System.out.println("\nPressione Enter para continuar...\n");
+        System.out.print("> ");
+        SCANNER.nextLine();
     }
 }

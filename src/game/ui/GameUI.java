@@ -44,6 +44,8 @@ public class GameUI {
             return FLAG_EMOJI;
         } else if (node.isRevealed()) {
             return String.valueOf(node.getBombsAround() + " ");
+        } else if (node.isBomb()) {
+            return BOMB_EMOJI;
         } else {
             return TREE_EMOJI;
         }
