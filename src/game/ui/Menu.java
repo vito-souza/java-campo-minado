@@ -91,6 +91,7 @@ public class Menu {
         System.out.println(
                 "\t2. Use \"/flag [posição]\" para marcar/desmarcar uma célula como suspeita de conter uma mina.");
         System.out.println("\t\tExemplo: /reveal 1b, /flag 3c...");
+        System.out.println("\t3. Use \"/exit para sair.");
         inputPrompt();
     }
 
