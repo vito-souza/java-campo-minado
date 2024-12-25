@@ -3,6 +3,7 @@ package game.logic;
 import java.util.Random;
 
 import game.ui.GameUI;
+import game.ui.Menu;
 import model.Difficulty;
 import model.Node;
 
@@ -97,8 +98,15 @@ public class GameHandler {
 
         board[row][col].reveal();
 
-        if (board[row][col].isBomb())
-            System.out.println("BOOM! Você perdeu o jogo!");
+        if (board[row][col].isBomb()) {
+            Menu.gameOver();
+            System.exit(0);
+        }
+
+        if (checkWin()) {
+            Menu.victory();
+            System.exit(0);
+        }
 
         if (isFirstMove) {
             placeBombs(row, col);
@@ -107,10 +115,6 @@ public class GameHandler {
 
         if (board[row][col].getBombsAround() == 0) {
             revealAdjacentCells(row, col);
-        }
-
-        if (checkWin()) {
-            System.out.println("Parabéns! Você venceu o jogo!");
         }
     }
 

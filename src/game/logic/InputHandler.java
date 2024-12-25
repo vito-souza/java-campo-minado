@@ -25,8 +25,10 @@ public class InputHandler {
                 continue;
             }
 
-            int row = Integer.parseInt(parts[1].substring(0, 1));
-            int col = parts[1].charAt(1) - 'a';
+            int row = Integer.parseInt(parts[1].replaceAll("[^0-9]", ""));
+
+            char letter = parts[1].replaceAll("[^a-zA-Z]", "").charAt(0);
+            int col = letter - 'a';
 
             if (input.startsWith("/reveal")) {
                 game.reveal(row, col);

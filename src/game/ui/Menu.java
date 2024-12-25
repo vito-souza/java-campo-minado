@@ -30,6 +30,24 @@ public class Menu {
              ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝ ╚══════╝
             """;
 
+    public static final String GAME_OVER = """
+             ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗
+            ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+            ██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
+            ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+            ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
+             ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
+            """;
+
+    public static final String YOU_WIN = """
+            ██╗   ██╗ ██████╗ ██╗   ██╗    ██╗    ██╗██╗███╗   ██╗██╗
+            ╚██╗ ██╔╝██╔═══██╗██║   ██║    ██║    ██║██║████╗  ██║██║
+             ╚████╔╝ ██║   ██║██║   ██║    ██║ █╗ ██║██║██╔██╗ ██║██║
+              ╚██╔╝  ██║   ██║██║   ██║    ██║███╗██║██║██║╚██╗██║╚═╝
+               ██║   ╚██████╔╝╚██████╔╝    ╚███╔███╔╝██║██║ ╚████║██╗
+               ╚═╝    ╚═════╝  ╚═════╝      ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝
+            """;
+
     private Menu() {
     }
 
@@ -59,5 +77,19 @@ public class Menu {
         System.out.println(
                 "\t2. Use \"/flag [posição]\" para marcar/desmarcar uma célula como suspeita de conter uma mina.");
         System.out.println("\t\tExemplo: /reveal 1b, /flag 3c...\n");
+    }
+
+    public static void gameOver() {
+        TerminalUtils.clear();
+
+        System.out.println("\n" + GAME_OVER);
+        System.out.println("\tVocê selecionou uma bomba.\n");
+    }
+
+    public static void victory() {
+        TerminalUtils.clear();
+
+        System.out.println("\n" + YOU_WIN);
+        System.out.println("\tParabéns! Você teve paciência o suficiente pra chegar ao fim do jogo sem perder.\n");
     }
 }
